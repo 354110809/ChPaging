@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YxPaging-API</title>
+    <link href="css.css" rel="stylesheet">
+</head>
+<body>
+<div class="top">
+    <h1 class="main">
+        <strong>YxPaging</strong>
+        <a href="#" class="choose">API</a>
+        <a href="./guida.html">教程</a>
+        <a href="./demo.html">demo</a>
+    </h1>
+</div>
+
+<div class="main">
+    <h2>属性配置</h2>
+    <table cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>属性</th>
+            <th>类型</th>
+            <th>必填</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><b>data</b></td>
+            <td>Array</td>
+            <td>否</td>
+            <td>静态分页数据(假分页)。<b>静态分页必填</b>如果是动态分页则不需要此参数。</td>
+        </tr>
+        <tr>
+            <td><b>xhr</b></td>
+            <td>Object</td>
+            <td>否</td>
+            <td>动态分页ajax请求配置,<b>动态分页必填。</b><br>
+                配置参数支持jq的ajax方法配置,但在这不能配success回调函数。success回调配置请看xhrSuccess。静态则不需要此参数。<br>
+                中间需要修改此参数可以通过set方法修改
+            </td>
+        </tr>
+        <tr>
+            <td><b>xhrSuccess</b></td>
+            <td>Function</td>
+            <td>否</td>
+            <td>动态分页ajax请求配置,<b>动态分页必填。</b><br>
+                说明下:这并是直接处理分页列表的回调,这只是格式化数据。服务端必须返回一个count数和当前页的数据列表。<br>
+                <b>返回值:必须返回。格式{data : [],count : 100}</b>
+            </td>
+        </tr>
+        <tr>
+            <td><b>first</b></td>
+            <td>Boolean</td>
+            <td>否</td>
+            <td>首页按钮开关,默认true(开)</td>
+        </tr>
+        <tr>
+            <td><b>last</b></td>
+            <td>Boolean</td>
+            <td>否</td>
+            <td>末页按钮开关,默认true(开)</td>
+        </tr>
+        <tr>
+            <td><b>viewNumber</b></td>
+            <td>Boolean</td>
+            <td>否</td>
+            <td>每页显示多少条选择器开关,默认true(开)</td>
+        </tr>
+        <tr>
+            <td><b>viewOpt</b></td>
+            <td>Array</td>
+            <td>否</td>
+            <td>每页显示多少条选择器条数列表,默认[10,20,50,100]</td>
+        </tr>
+        <tr>
+            <td><b>limit</b></td>
+            <td>Number</td>
+            <td>否</td>
+            <td>默认每页显示多少条,默认10</td>
+        </tr>
+        <tr>
+            <td><b>current</b></td>
+            <td>Number</td>
+            <td>否</td>
+            <td>当前页,默认1。第1页</td>
+        </tr>
+        <tr>
+            <td><b>jump</b></td>
+            <td>Boolean</td>
+            <td>否</td>
+            <td>快速跳转页面开关,默认true(开)</td>
+        </tr>
+        <tr>
+            <td><b>viewCount</b></td>
+            <td>Boolean</td>
+            <td>否</td>
+            <td>总计页数开关,默认true(开)</td>
+        </tr>
+        <tr>
+            <td><b>reloadPage</b></td>
+            <td>Function</td>
+            <td>是</td>
+            <td class="red">分页操作回调,在这里做关联列表的更新操作。<br>
+                创建实例和每次操作分页都会执行一次。并回传当前分页的必要参数。function(msg,data)<br>
+                <pre>{
+    msg : {
+        evnt : name //事件名, 包括(jump、viewNum)
+        type : type //事件类型, 包括(option、target、more、first、last、next、prev)
+        start : start //当前页开始值
+        end : end //当前页结束值
+        count : count
+        limit : limit
+        current : current
+    }
+    ,data : [] //当前数据页面
+}</pre>
+                创建实例时调用返回的msg中evnt , type 都是 "default"
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>方法</h2>
+    <h3>YxPaging(target,object)</h3>
+    <ul>
+        <li>
+            <p>参数</p>
+            <span>{target} HTMLElement,string || ＤＯＭ节点,也可以传jq选择器或者jq选择器字符串</span>
+            <span>{Object} object</span>
+        </li>
+        <li>
+            <p>用法</p>
+            <pre >
+    var yxPaging = new YxPaging($target,{
+        data :["列表1","列表2",...],
+        reloadPage : function(msg,data){...//页面更新操作以及其他操作}
+    }); </pre>
+        <li>
+            <p>详细</p>
+            <div class="detail">
+                YxPaging本身是一个构造函数,所以每使用一次即实例化一次YxPaging。参数必填,第一个则是分页的DOM容器,第二个为配置参数。参照属性介绍。
+            </div>
+        </li>
+    </ul>
+    <h3>YxPaging.set(object)</h3>
+    <ul>
+        <li>
+            <p>参数</p>
+            <span>{Object} object</span>
+        </li>
+        <li>
+            <p>用法</p>
+            <pre >
+    YxPaging.set({
+        limit : 30
+    }); </pre>
+        <li>
+            <p>详细</p>
+            <div class="detail">
+                实例方法,数据更新需要重新计算分页条数则掉用此方法。
+            </div>
+        </li>
+    </ul>
+    <h3>YxPaging.get(key)</h3>
+    <ul>
+        <li>
+            <p>参数</p>
+            <span>{String} key</span>
+        </li>
+        <li>
+            <p>用法</p>
+            <pre >
+    YxPaging.get('limit');</pre>
+        </li>
+        <li>
+            <p>详细</p>
+            <div class="detail">
+                实例方法,获取实例中的属性数据。
+            </div>
+    </ul>
+    <h3>YxPaging.reloadPages()</h3>
+    <ul>
+        <li>
+            <p>用法</p>
+            <pre >
+    YxPaging.reloadPages();</pre>
+        </li>
+        <li>
+            <p>详细</p>
+            <div class="detail">
+                实例方法,数据更新需要重新渲染分页则掉用此方法。一般通过set方法重置了分页值则需要掉用,如数据总条数改变了。
+            </div>
+        </li>
+    </ul>
+    <!--<h2>事件</h2>-->
+    <!--<table cellspacing="0" cellpadding="0">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>事件名</th>-->
+            <!--<th>使用方法</th>-->
+            <!--<th>描述</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td>jump</td>-->
+            <!--<td>-->
+            <!--<pre >$(YxPaging).on("jump",function(e,msg){-->
+                <!--console.log(msg)-->
+            <!--})</pre>-->
+            <!--</td>-->
+            <!--<td>事件回传事件名,事件类型</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>viewNum</td>-->
+            <!--<td>-->
+                <!--<pre >$(YxPaging).on("viewNum",function(e,msg){-->
+                    <!--console.log(msg)-->
+                <!--})</pre></td>-->
+            <!--<td>事件回传事件名,事件类型</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+</div>
+<div class="footer">
+    Ch 版权所有
+</div>
+</body>
+</html>
