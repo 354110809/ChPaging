@@ -11,6 +11,7 @@
 <div class="top">
     <h1 class="main">
         <strong>YxPaging</strong>
+        <a href="../index.html">首页</a>
         <a href="./api.html">API</a>
         <a href="./guida.html">教程</a>
         <a href="#" class="choose">demo</a>
@@ -58,6 +59,34 @@
 < ul id="demo1_list" class="demo_list">< /ul>
 < div id="demo1_page" class="demo_page">< /div>
 
+//css
+    .demo_list{
+        list-style: none;
+        margin-top: 30px;
+    }
+    .demo_list li{
+        height: 30px;
+    }
+    .demo_page span{
+        display: inline-block;
+        margin:0 10px;
+    }
+    .demo_page a{
+        display: inline-block;
+        margin: 0 5px;
+    }
+    .demo_page a.yxPaging_choose{
+        color: #f00;
+    }
+    .demo_page input{
+        width: 30px;
+    }
+    .demo_page button{
+        width: 40px;
+        height: 21px;
+        line-height: 20px;
+    }
+
 //js
 < script>
     var demoYP1 = new YxPaging("#demo1_page",{
@@ -96,7 +125,34 @@
 //html
 < ul id="demo2_list" class="demo_list">< /ul>
 < div id="demo2_page" class="demo_page">< /div>
-//ja
+//css
+    .demo_list{
+        list-style: none;
+        margin-top: 30px;
+    }
+    .demo_list li{
+        height: 30px;
+    }
+    .demo_page span{
+        display: inline-block;
+        margin:0 10px;
+    }
+    .demo_page a{
+        display: inline-block;
+        margin: 0 5px;
+    }
+    .demo_page a.yxPaging_choose{
+        color: #f00;
+    }
+    .demo_page input{
+        width: 30px;
+    }
+    .demo_page button{
+        width: 40px;
+        height: 21px;
+        line-height: 20px;
+    }
+//javascript
 var data = ['测试YxPaging0','测试YxPaging1','测试YxPaging2','测试YxPaging3','测试YxPaging4','测试YxPaging5','测试YxPaging6','测试YxPaging7','测试YxPaging8','测试YxPaging9','测试YxPaging10','测试YxPaging11','测试YxPaging12','测试YxPaging13','测试YxPaging14','测试YxPaging15','测试YxPaging16','测试YxPaging17','测试YxPaging18','测试YxPaging19','测试YxPaging20','测试YxPaging21','测试YxPaging22','测试YxPaging23','测试YxPaging24','测试YxPaging25','测试YxPaging26','测试YxPaging27','测试YxPaging28','测试YxPaging29','测试YxPaging30','测试YxPaging31','测试YxPaging32','测试YxPaging33','测试YxPaging34','测试YxPaging35','测试YxPaging36','测试YxPaging37','测试YxPaging38','测试YxPaging39','测试YxPaging40','测试YxPaging41','测试YxPaging42','测试YxPaging43','测试YxPaging44','测试YxPaging45','测试YxPaging46','测试YxPaging47','测试YxPaging48','测试YxPaging49','测试YxPaging50','测试YxPaging51'];
 var demoYP2 = new YxPaging("#demo2_page",{
     last : false
