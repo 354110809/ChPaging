@@ -106,11 +106,12 @@
             // this.o = $.extend(true,{},myThis.o);
             var _o = myThis.o;
 
+            myThis.static.start = 1;
             if(_o.xhr){//动态分页
                 this.xhrReload(myThis);
             }else{//静态数据
                 _o.count = _o.data.length;
-                myThis.static.start = 1;
+                // myThis.static.start = 1;
                 myThis.static.end = _o.limit;
 
                 htmlReload.init(myThis);
