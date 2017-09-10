@@ -20,11 +20,11 @@
             var _o = myThis.o;
             var html = '';
             if(_o.first){
-                html += '<a href="javascript:;" id="yxPagingFirst">首页</a>';
+                html += '<a href="javascript:;" id="ChPagingFirst">首页</a>';
             }
-            html += '<a href="javascript:;" id="yxPagingPrev">上一页</a><span  id="yxPagingBtns"></span><a href="javascript:;" id="yxPagingNext">下一页</a>';
+            html += '<a href="javascript:;" id="ChPagingPrev">上一页</a><span  id="ChPagingBtns"></span><a href="javascript:;" id="ChPagingNext">下一页</a>';
             if(_o.last){
-                html += '<a href="javascript:;" id="yxPagingLast">尾页</a>';
+                html += '<a href="javascript:;" id="ChPagingLast">尾页</a>';
             }
             if(_o.viewNumber){
                 var opts = "";
@@ -37,16 +37,16 @@
                     }
                     opts += '<option value="'+ me +'"'+ edStr +'>' + me + '</option>';
                 }
-                html += '<span><label>每页显示</label><select id="yxPagingViewNum">' + opts + '</select><label>条</label></span>';
+                html += '<span><label>每页显示</label><select id="ChPagingViewNum">' + opts + '</select><label>条</label></span>';
             }
             if(_o.jump){
-                html += '<span><label>跳转到第</label><input type="text"  id="yxPagingJumpNum"/><label>页</label><button id="yxPagingJumpBtn">go</button></span>';
+                html += '<span><label>跳转到第</label><input type="text"  id="ChPagingJumpNum"/><label>页</label><button id="ChPagingJumpBtn">go</button></span>';
             }
             if(_o.viewCount){
-                html += '<span id="yxPagingCount"></span>'
+                html += '<span id="ChPagingCount"></span>'
             }
             myThis.$target.html(html);
-            myThis.$pages = myThis.$target.find("#yxPagingBtns");
+            myThis.$pages = myThis.$target.find("#ChPagingBtns");
             // myThis.reloadPages();
         },
         //重新计算并渲染页标
@@ -55,7 +55,7 @@
             var str = '',choose = '',i,len,indexLen,pageCount = options.pageCount,current = options.current;
 
 
-            $target.find("#yxPagingCount").html("共" + pageCount + "页");
+            $target.find("#ChPagingCount").html("共" + pageCount + "页");
 
             if(pageCount > 10){
                 indexLen = 8;
@@ -82,14 +82,14 @@
 
             for(; i < len; i++){
                 if(i == current){
-                    choose = "class='yxPaging_choose'"
+                    choose = "class='ChPaging_choose'"
                 }else{
                     choose = '';
                 }
                 str += '<a href="javascript:;" name="' + i + '" ' + choose + '>' + i + '</a>';
             }
             if(pageCount > 10 && current != pageCount-1 && current != pageCount){
-                str += '<a href="javascript:;" class="yxPaging_more" name="more" index="'+ i +'">...</a>';
+                str += '<a href="javascript:;" class="ChPaging_more" name="more" index="'+ i +'">...</a>';
             }
             if(pageCount > 10 && current != pageCount){
                 str += '<a href="javascript:;" name="' + pageCount + '">' + pageCount + '</a>';
@@ -209,7 +209,7 @@
             $myThis.on("jump",eventFn).on("viewNum",eventFn);
 
             if(_o.viewNumber){
-                myThis.$target.on("change","#yxPagingViewNum",function(){//显示多少条
+                myThis.$target.on("change","#ChPagingViewNum",function(){//显示多少条
                     var $this = $(this),
                         val = $this.val();
                     _o.current = 1;
@@ -223,8 +223,8 @@
                 });
             }
             if(_o.jump){
-                myThis.$target.on("click","#yxPagingJumpBtn",function(){//输入页值跳转
-                    var val = $("#yxPagingJumpNum").val();
+                myThis.$target.on("click","#ChPagingJumpBtn",function(){//输入页值跳转
+                    var val = $("#ChPagingJumpNum").val();
                     _o.current = val || _o.current;
                     msg ={
                         evnt : "jump"
@@ -233,7 +233,7 @@
                     $myThis.trigger("jump",[msg]);
                 });
             }
-            myThis.$target.on("click","#yxPagingBtns a",function(){//点击页值跳转
+            myThis.$target.on("click","#ChPagingBtns a",function(){//点击页值跳转
                 var $this = $(this),
                     val = $this.attr("name");
                 if(val === "more"){
@@ -252,21 +252,21 @@
                     };
                     $myThis.trigger("jump",[msg]);
                 }
-            }).on("click","#yxPagingFirst",function () {//首页
+            }).on("click","#ChPagingFirst",function () {//首页
                 _o.current = 1;
                 msg ={
                     evnt : "jump"
                     ,type : "first"
                 };
                 $myThis.trigger("jump",[msg]);
-            }).on("click","#yxPagingLast",function () {//末页
+            }).on("click","#ChPagingLast",function () {//末页
                 _o.current = _o.pageCount;
                 msg ={
                     evnt : "jump"
                     ,type : "last"
                 };
                 $myThis.trigger("jump",[msg]);
-            }).on("click","#yxPagingNext",function () {//下一页
+            }).on("click","#ChPagingNext",function () {//下一页
                 _o.current++;
                 if(_o.current > _o.pageCount){
                     _o.current = _o.pageCount
@@ -277,7 +277,7 @@
                 };
                 $myThis.trigger("jump",[msg]);
 
-            }).on("click","#yxPagingPrev",function () {//上一页
+            }).on("click","#ChPagingPrev",function () {//上一页
                 _o.current--;
                 if(_o.current <= 0 ){
                     _o.current = 1
@@ -293,13 +293,13 @@
         }
     };
 
-    var YxPaging = function(target,options){
+    var ChPaging = function(target,options){
         this.$target = $(target);
         this.o = $.extend(true,{},defaults,options);
         this.static = {};
         operation.init(this);
     };
-    YxPaging.prototype = {
+    ChPaging.prototype = {
 
         //参数设置接口
         set : function(options){
@@ -320,5 +320,5 @@
         }
     };
 
-    w.YxPaging = w.YxPaging || YxPaging;
+    w.ChPaging = w.ChPaging || ChPaging;
 })(window,$);

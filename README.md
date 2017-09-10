@@ -1,4 +1,4 @@
-# yxPaging
+# ChPaging
 简单方便的分页插件
 # API
 ##属性

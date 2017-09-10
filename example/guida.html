@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>YxPaging-API</title>
+    <title>ChPaging-API</title>
     <link href="css.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.1.2/jquery.min.js"></script>
     <script src="../yx-paging.1.0.1.js"></script>
@@ -10,7 +10,7 @@
 <body>
 <div class="top">
     <h1 class="main">
-        <strong>YxPaging</strong>
+        <strong>ChPaging</strong>
         <a href="../index.html">首页</a>
         <a href="./api.html">API</a>
         <a href="#" class="choose">教程</a>
@@ -22,13 +22,13 @@
     <h2>教程</h2>
     <h3>第一步</h3>
     <div>
-        将jquery和YxPaging库引入到页面中
+        将jquery和ChPaging库引入到页面中
     </div>
     <pre >
         < script src="jquery.js">< /script >
         < script src="yx-paging.1.0.1.min.js">< /script ></pre>
     <h3>第二步</h3>
-    <div>创建一个YxPaging实例,并操作实例关联列表展示。<b class="red">必须创建一个分页容器节点。</b></div>
+    <div>创建一个ChPaging实例,并操作实例关联列表展示。<b class="red">必须创建一个分页容器节点。</b></div>
     <pre >
         //html
         < ul id="list">//与分页关联的列表节点
@@ -38,7 +38,7 @@
     <p>1、使用ajax请求即时数据</p>
     <pre >
         //js
-    var paging = new YxPaging($("pagingId"),{
+    var paging = new ChPaging($("pagingId"),{
         xhr : {//与jq的ajax方法属性值相似。不同点:不能设置success回调
             url : '服务端请求接口地址'
             data : {请求参数}
