@@ -1,7 +1,12 @@
 /**
  * Created by Ch on 16/5/23.
  */
-(function(w,$){
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global.ChPaging = factory());
+}(this, (function () {
+    'use strict';
     //默认参数
     var defaults = {
         first : true,//是否开启首页
@@ -320,5 +325,5 @@
         }
     };
 
-    w.ChPaging = w.ChPaging || ChPaging;
-})(window,$);
+    return ChPaging;
+})));
