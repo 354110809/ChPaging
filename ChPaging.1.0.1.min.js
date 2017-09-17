@@ -1,6 +1,6 @@
 /**
  * Created by Ch on 16/5/23.
- @Name : ChPaging v3.8.5 分页插件
+ @Name : ChPaging v1.0.1 分页插件
  @Author: Ch/chenhui
  @Date: 2016/5/23
  @QQ：894684604
