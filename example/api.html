@@ -107,22 +107,93 @@
             <td class="red">分页操作回调,在这里做关联列表的更新操作。<br>
                 创建实例和每次操作分页都会执行一次。并回传当前分页的必要参数。function(msg,data)<br>
                 <pre>{
-    msg : {
-        evnt : name //事件名, 包括(jump、viewNum)
-        type : type //事件类型, 包括(option、target、more、first、last、next、prev)
-        start : start //当前页开始值
-        end : end //当前页结束值
-        count : count
-        limit : limit
-        current : current
-    }
-    ,data : [] //当前数据页面
-}</pre>
+                    msg : {
+                        evnt : name //事件名, 包括(jump、viewNum)
+                        type : type //事件类型, 包括(option、target、more、first、last、next、prev)
+                        start : start //当前页开始值
+                        end : end //当前页结束值
+                        count : count
+                        limit : limit
+                        current : current
+                    }
+                    ,data : [] //当前数据页面
+                }</pre>
                 创建实例时调用返回的msg中evnt , type 都是 "default"
+            </td>
+        </tr>
+        <tr>
+            <td><b>classPrefix</b></td>
+            <td>String</td>
+            <td>否</td>
+            <td>
+                class名前缀,默认值"Ch";自己定义Class名,样式完全由自己掌控。class名请查阅class元素表
+            </td>
+        </tr>
+        <tr>
+            <td><b>txtConfig</b></td>
+            <td>Object</td>
+            <td>否</td>
+            <td>分页中所有要用到的文案配置表,可配参数以及默认配置如下:<br>
+                first  '首页' --&gt;首页按钮;<br/>
+                last  '尾页'--&gt;尾页按钮;<br/>
+                next  '下一页'--&gt;上一页按钮;<br/>
+                prev  '上一页'--&gt;下一页按钮;<br/>
+                jumpBtn  'go' --&gt;自由跳转分页按钮;<br/>
+                jumpTxt  '跳转到{n}页'--&gt;自由跳转分页描述文案; <b>(注意{n}表示中间的系统数字或其他系统文案,不可更改)</b><br/>
+                countPage  "共{n}页"--&gt;页数统计描述文案;<br/>
+                countNumber  '共{n}条'--&gt;条数统计描述文案;<br/>
+                viewNumber  '每页显示{n}条'--&gt;页数选择器描述文案;<br/>
             </td>
         </tr>
         </tbody>
     </table>
+    <h2>class元素表($classPrefix表示您设置的class前缀,默认Ch)</h2>
+        <table cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$classPrefix_paging_first</td>
+                    <td>首页按钮</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_last</td>
+                    <td>尾页按钮</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_prev</td>
+                    <td>上一页</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_next</td>
+                    <td>下一页</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_btn</td>
+                    <td>数字分页按钮容器,每个小按钮是一个a标签</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_view_number</td>
+                    <td>显示条数选择器</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_jump</td>
+                    <td>自由跳转页工具</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_count_page</td>
+                    <td>统计总页容器</td>
+                </tr>
+                <tr>
+                    <td>$classPrefix_paging_count_number</td>
+                    <td>统计总条数容器</td>
+                </tr>
+            </tbody>
+        </table>
     <h2>方法</h2>
     <h3>ChPaging(target,object)</h3>
     <ul>
@@ -195,11 +266,11 @@
             </div>
         </li>
     </ul>
-    <h2>Class</h2>
-    <h3>ChPaging_choose</h3>
-    <div class="detail">当前选中的页签按钮class</div>
-    <h3>ChPaging_more</h3>
-    <div class="detail">页签太多,省略号的按钮class</div>
+    <!--<h2>Class</h2>-->
+    <!--<h3>ChPaging_choose</h3>-->
+    <!--<div class="detail">当前选中的页签按钮class</div>-->
+    <!--<h3>ChPaging_more</h3>-->
+    <!--<div class="detail">页签太多,省略号的按钮class</div>-->
     <!--<h2>事件</h2>-->
     <!--<table cellspacing="0" cellpadding="0">-->
         <!--<thead>-->
@@ -231,7 +302,7 @@
     <!--</table>-->
 </div>
 <div class="footer">
-    Ch 版权所有
+    Ch 版权所有; 联系QQ:894684604
 </div>
 </body>
 </html>
