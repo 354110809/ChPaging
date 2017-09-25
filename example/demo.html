@@ -5,7 +5,7 @@
     <title>ChPaging-API</title>
     <link href="css.css" rel="stylesheet">
     <script src="./jquery.2.1.2.min.js"></script>
-    <script src="../ChPaging.1.0.1.js"></script>
+    <script src="../ChPaging.1.0.2.js"></script>
 </head>
 <body>
 <div class="top">
@@ -55,7 +55,7 @@
     <pre>
 //html
 &ltscript src="./jquery.2.1.2.min.js"&gt&lt/script&gt
-&ltscript src="../ChPaging.1.0.1.js"&gt&lt/script&gt
+&ltscript src="../ChPaging.1.0.2.js"&gt&lt/script&gt
 &ltul id="demo1_list" class="demo_list"&gt&lt/ul&gt
 &ltdiv id="demo1_page" class="demo_page"&gt&lt/div&gt
 
@@ -104,7 +104,7 @@
                     ,count : data.count
                 };
             }
-            ,operReady : function (msg) {
+            ,operationCallback : function (msg,data) {
                 demoYP1.set({//设置请求参数
                     xhr : {
                         data : {
@@ -112,8 +112,6 @@
                         }
                     }
                 });
-            }
-            ,operFinsh : function(data){
                 $("#demo1_list").html("");
                 for(var i = 0; i < data.length; i++){
                     var index = (demoYP1.get("start") + i);
@@ -168,7 +166,7 @@
             ,data : data
             ,limit : 5
             ,viewOpt : [5,10,30]
-            ,operFinsh : function(data){
+            ,operationCallback : function(msg,data){
                 $("#demo2_list").html("");
                 for(var i = 0; i < data.length; i++){
                     $("#demo2_list").append("< li>"+data[i]+"< /li>")
@@ -192,7 +190,7 @@
                     ,count : data.count
                 };
             }
-            ,operReady : function (msg) {
+            ,operationCallback : function (msg,data) {
                 demoYP1.set({//设置请求参数
                     xhr : {
                         data : {
@@ -200,8 +198,6 @@
                         }
                     }
                 });
-            }
-            ,operFinsh : function(data){
                 $("#demo1_list").html("");
                 for(var i = 0; i < data.length; i++){
                     var index = (demoYP1.get("start") + i);
@@ -219,7 +215,7 @@
             ,data : data
             ,limit : 5
             ,viewOpt : [5,10,30]
-            ,operFinsh : function(data){
+            ,operationCallback : function(msg,data){
                 $("#demo2_list").html("");
                 for(var i = 0; i < data.length; i++){
                     $("#demo2_list").append("<li>"+data[i]+"</li>")

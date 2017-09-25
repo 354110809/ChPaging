@@ -101,14 +101,14 @@
             <td>总计页数开关,默认true(开)</td>
         </tr>
         <tr>
-            <td><b>reloadPage</b></td>
+            <td><b>operationCallback</b></td>
             <td>Function</td>
             <td>是</td>
             <td class="red">分页操作回调,在这里做关联列表的更新操作。<br>
-                创建实例和每次操作分页都会执行一次。并回传当前分页的必要参数。function(msg,data)<br>
+                创建实例、set参数(打开reload时)以及每次操作分页都会执行一次。并回传当前分页的必要参数。function(msg,data)<br>
                 <pre>{
                     msg : {
-                        evnt : name //事件名, 包括(jump、viewNum)
+                        evnt : name //事件名, 包括(jump、viewNum、reload)
                         type : type //事件类型, 包括(option、target、more、first、last、next、prev)
                         start : start //当前页开始值
                         end : end //当前页结束值
@@ -118,7 +118,8 @@
                     }
                     ,data : [] //当前数据页面
                 }</pre>
-                创建实例时调用返回的msg中evnt , type 都是 "default"
+                事件说明:
+                jump : 页面跳转; viewNum : 显示项操作事件; reload : 数据重新加载
             </td>
         </tr>
         <tr>
@@ -216,22 +217,24 @@
             </div>
         </li>
     </ul>
-    <h3>ChPaging.set(object)</h3>
+    <h3>ChPaging.set(object,Boolean)</h3>
     <ul>
         <li>
             <p>参数</p>
             <span>{Object} object</span>
+            <span>Boolean boolean</span>
         </li>
         <li>
             <p>用法</p>
             <pre >
     ChPaging.set({
         limit : 30
-    }); </pre>
+    ,false) </pre>
         <li>
             <p>详细</p>
             <div class="detail">
-                实例方法,数据更新需要重新计算分页条数则掉用此方法。
+                实例方法,数据更新需要重新计算分页条数则掉用此方法。<br/>
+                第二个参数为true时,立即使用新配置更新分页。在外部条件控制分页时使用,在operationCallback内使用立即更新功能会导致死循环。
             </div>
         </li>
     </ul>
@@ -252,7 +255,7 @@
                 实例方法,获取实例中的属性数据。
             </div>
     </ul>
-    <h3>ChPaging.reloadPages()</h3>
+    <!--<h3>ChPaging.reloadPages()</h3>
     <ul>
         <li>
             <p>用法</p>
@@ -265,7 +268,7 @@
                 实例方法,数据更新需要重新渲染分页则掉用此方法。一般通过set方法重置了分页值则需要掉用,如数据总条数改变了。
             </div>
         </li>
-    </ul>
+    </ul>-->
     <!--<h2>Class</h2>-->
     <!--<h3>ChPaging_choose</h3>-->
     <!--<div class="detail">当前选中的页签按钮class</div>-->

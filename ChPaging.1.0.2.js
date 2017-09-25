@@ -130,30 +130,47 @@
     //
     var operation = {
         //初始化
-        init : function(myThis){
+        init : function(myThis,restart){
             // this.o = $.extend(true,{},myThis.o);
             var _o = myThis.o;
 
             myThis.static.start = 1;
+            var msg = {
+                event : "reload"
+                ,type : "reload"
+            };
+            msg.start = myThis.static.start;
+            msg.end = myThis.static.end;
+            if(_o.count){
+                msg.count = _o.count;
+            }
+            if(_o.current){
+                msg.current = _o.current;
+            }
+            if(_o.limit){
+                msg.limit = _o.limit;
+            }
             if(_o.xhr){//动态分页
-                this.xhrReload(myThis);
+                this.xhrReload(myThis,msg);
             }else{//静态数据
                 _o.count = _o.data.length;
                 // myThis.static.start = 1;
                 myThis.static.end = _o.limit;
 
                 htmlReload.init(myThis);
-                this.reloadListCbk(myThis);
+                this.reloadListCbk(myThis,msg);
             }
             // this.ready(myThis);
-            //事件绑定
-            this.eventBind(myThis);
+            if(!restart){
+                //事件绑定
+                this.eventBind(myThis);
+            }
         }
         //准备开始
         ,operationReady : function (myThis,m) {
             var _o = myThis.o
                 ,msg = m || {
-                    evnt : "default"
+                    event : "default"
                     ,type : "default"
                 };
 
@@ -175,9 +192,9 @@
                 msg.limit = _o.limit;
             }
 
-            if(_o.operReady){
-                _o.operReady(msg);
-            }
+            // if(_o.operationCallback){
+            //     _o.operationCallback(msg);
+            // }
 
 
             // if(m){//操作分页
@@ -196,7 +213,7 @@
                 _o.data = dataObj.data;
                 _o.count = dataObj.count;
 
-                if(!msg){//判断如果是初始化则执行初始渲染
+                if(msg.event == "reload"){//判断如果是初始化则执行初始渲染
                     htmlReload.init(myThis);
                 }
                 _this.reloadListCbk(myThis,msg)
@@ -207,7 +224,7 @@
             var _o = myThis.o
                 ,data;
 
-            myThis.reloadPages();
+            this.reloadPages(myThis);
 
 
             //如果走的静态数据则取出前页需要展示的数据
@@ -220,10 +237,23 @@
             }else{
                 data = _o.data;
             }
-            //调用具体渲染当前页的回调函数
-            if(_o.operFinsh){
-                _o.operFinsh(data);
+
+            if(_o.operationCallback){
+                _o.operationCallback(m,data);
             }
+            //调用具体渲染当前页的回调函数
+            // if(_o.operFinsh){
+            //     _o.operFinsh(data);
+            // }
+        },
+        //重新计算多少页
+        reloadPages : function(myThis){
+            var _o = myThis.o;
+            _o.pageCount = Math.ceil(_o.count / _o.limit);
+            if(_o.current > _o.pageCount){
+                _o.current = _o.pageCount;
+            }
+            htmlReload.reloadPages(_o,myThis.$pages,myThis.$target);
         }
         //事件绑定
         ,eventBind : function(myThis){
@@ -243,7 +273,7 @@
                     _o.current = 1;
                     _o.limit = val;
                     msg ={
-                        evnt : "viewNum"
+                        event : "viewNum"
                         ,type : "option"
                     };
 
@@ -255,7 +285,7 @@
                     var val = $("#ChPagingJumpNum").val();
                     _o.current = val || _o.current;
                     msg ={
-                        evnt : "jump"
+                        event : "jump"
                         ,type : "target"
                     };
                     $myThis.trigger("jump",[msg]);
@@ -268,14 +298,14 @@
                     var index = $this.attr("index");
                     _o.current = index;
                     msg ={
-                        evnt : "jump"
+                        event : "jump"
                         ,type : "more"
                     };
                     $myThis.trigger("jump",[msg]);
                 }else{
                     _o.current = val;
                     msg ={
-                        evnt : "jump"
+                        event : "jump"
                         ,type : "target"
                     };
                     $myThis.trigger("jump",[msg]);
@@ -283,14 +313,14 @@
             }).on("click","#ChPagingFirst",function () {//首页
                 _o.current = 1;
                 msg ={
-                    evnt : "jump"
+                    event : "jump"
                     ,type : "first"
                 };
                 $myThis.trigger("jump",[msg]);
             }).on("click","#ChPagingLast",function () {//末页
                 _o.current = _o.pageCount;
                 msg ={
-                    evnt : "jump"
+                    event : "jump"
                     ,type : "last"
                 };
                 $myThis.trigger("jump",[msg]);
@@ -300,7 +330,7 @@
                     _o.current = _o.pageCount
                 }
                 msg ={
-                    evnt : "jump"
+                    event : "jump"
                     ,type : "next"
                 };
                 $myThis.trigger("jump",[msg]);
@@ -311,7 +341,7 @@
                     _o.current = 1
                 }
                 msg ={
-                    evnt : "jump"
+                    event : "jump"
                     ,type : "prev"
                 };
                 $myThis.trigger("jump",[msg]);
@@ -328,23 +358,16 @@
         operation.init(this);
     };
     ChPaging.prototype = {
-
         //参数设置接口
-        set : function(options){
+        set : function(options,restart){
             $.extend(true,this.o,options);
+            if(restart){
+                operation.init(this,restart);
+            }
         },
         //获取参数
         get : function (str) {
             return this.o[str] || this.static[str];
-        },
-        //重新计算多少页
-        reloadPages : function(){
-            var _o = this.o;
-            _o.pageCount = Math.ceil(_o.count / _o.limit);
-            if(_o.current > _o.pageCount){
-                _o.current = _o.pageCount;
-            }
-            htmlReload.reloadPages(_o,this.$pages,this.$target);
         }
     };
 

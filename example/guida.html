@@ -5,7 +5,7 @@
     <title>ChPaging-API</title>
     <link href="css.css" rel="stylesheet">
     <script src="./jquery.2.1.2.min.js"></script>
-    <script src="../ChPaging.1.0.1.js"></script>
+    <script src="../ChPaging.1.0.2.js"></script>
 </head>
 <body>
 <div class="top">
@@ -26,7 +26,7 @@
     </div>
     <pre >
         < script src="jquery.js">< /script >
-        < script src="ChPaging.1.0.1.min.js">< /script ></pre>
+        < script src="ChPaging.1.0.2.min.js">< /script ></pre>
     <h3>第二步</h3>
     <div>创建一个ChPaging实例,并操作实例关联列表展示。<b class="red">必须创建一个分页容器节点。</b></div>
     <pre >
@@ -47,7 +47,7 @@
         xhrSuccess : function(data){//ajax中的success回调
             return {data : data.lsit, count : data.count}
         }
-        reloadPage : function(msg,data){
+        operationCallback : function(msg,data){
             //msg 返回属性
             //data 当前分页数据,数组。
             for(var i = 0; i < data.length; i++){
@@ -62,7 +62,7 @@
     var paging = new x
         data : data,
         limit : 2,
-        reloadPage : function(msg,data){
+        operationCallback : function(msg,data){
             //msg 返回属性
             //data 当前分页数据,数组。
             for(var i = 0; i < data.length; i++){
