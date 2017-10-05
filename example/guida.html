@@ -46,7 +46,17 @@
         },
         xhrSuccess : function(data){//ajax中的success回调
             return {data : data.lsit, count : data.count}
-        }
+        },
+        operationReady(msg){//操作翻页执行前准备钩子
+            paging.set({//重置请求参数
+                xhr : {
+                    data : {
+                        current : msg.current,
+                        limit : msg.limit
+                    }
+                }
+            });
+        },
         operationCallback : function(msg,data){
             //msg 返回属性
             //data 当前分页数据,数组。

@@ -192,9 +192,9 @@
                 msg.limit = _o.limit;
             }
 
-            // if(_o.operationCallback){
-            //     _o.operationCallback(msg);
-            // }
+            if(_o.operationReady){
+                _o.operationReady(msg);
+            }
 
 
             // if(m){//操作分页

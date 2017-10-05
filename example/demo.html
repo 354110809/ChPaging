@@ -103,8 +103,8 @@
                     data : data.data
                     ,count : data.count
                 };
-            }
-            ,operationCallback : function (msg,data) {
+            },
+            operationReady(msg){//操作翻页执行前准备钩子
                 demoYP1.set({//设置请求参数
                     xhr : {
                         data : {
@@ -112,6 +112,8 @@
                         }
                     }
                 });
+            }
+            ,operationCallback : function (msg,data) {
                 $("#demo1_list").html("");
                 for(var i = 0; i < data.length; i++){
                     var index = (demoYP1.get("start") + i);
@@ -189,8 +191,8 @@
                     data : data.data
                     ,count : data.count
                 };
-            }
-            ,operationCallback : function (msg,data) {
+            },
+            operationReady(msg){//操作翻页执行前准备钩子
                 demoYP1.set({//设置请求参数
                     xhr : {
                         data : {
@@ -198,6 +200,8 @@
                         }
                     }
                 });
+            }
+            ,operationCallback : function (msg,data) {
                 $("#demo1_list").html("");
                 for(var i = 0; i < data.length; i++){
                     var index = (demoYP1.get("start") + i);
