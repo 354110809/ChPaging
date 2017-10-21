@@ -1,0 +1,55 @@
+
+
+.Ch {
+    margin: 20px 0;
+    font-size: 12px
+}
+
+.Ch a,.Ch button,.Ch input,.Ch label,.Ch span {
+    margin-right: 5px;
+    display: inline-block
+}
+
+.Ch input {
+    width: 31px;
+    height: 20px;
+    padding: 0;
+    text-align: center;
+    vertical-align: bottom
+}
+
+.Ch button {
+    background: #09f;
+    width: 25px;
+    height: 20px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    line-height: 20px;
+    cursor: pointer
+}
+
+.Ch a {
+    display: inline-block;
+    border-radius: 4px;
+    background: #fff;
+    text-decoration: none;
+    color: #1d1e37;
+    border: 1px solid #ddd;
+    line-height: 22px;
+    padding: 0 5px;
+}
+
+.Ch a.Ch_Paging_choose {
+    background: #09f;
+    border: 1px solid #09f;
+    color: #fff
+}
+
+.Ch a.Ch_paging_next,.Ch a.Ch_paging_prev {
+    border: none
+}
+
+.Ch a.Ch_paging_first,.Ch a.Ch_paging_last {
+    border: none
+}

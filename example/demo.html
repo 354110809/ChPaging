@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ChPaging-API</title>
     <link href="css.css" rel="stylesheet">
+    <link href="skin.css" rel="stylesheet">
     <script src="./jquery.2.1.2.min.js"></script>
     <script src="../ChPaging.1.0.2.js"></script>
 </head>
@@ -25,72 +26,23 @@
     .demo_list li{
         height: 30px;
     }
-    .demo_page span{
-        display: inline-block;
-        margin:0 10px;
-    }
-    .demo_page a{
-        display: inline-block;
-        margin: 0 5px;
-    }
-    .demo_page a.Ch_Paging_choose{
-        color: #f00;
-    }
-    .demo_page input{
-        width: 30px;
-    }
-    .demo_page button{
-        width: 40px;
-        height: 21px;
-        line-height: 20px;
-    }
 </style>
 <div class="main">
     <h2>动态DEMO</h2>
     <ul id="demo1_list" class="demo_list">
 
     </ul>
-    <div id="demo1_page" class="demo_page"></div>
+    <div id="demo1_page" class="Ch"></div>
     <p>代码:</p>
     <pre>
 //html
 &ltscript src="./jquery.2.1.2.min.js"&gt&lt/script&gt
 &ltscript src="../ChPaging.1.0.2.js"&gt&lt/script&gt
 &ltul id="demo1_list" class="demo_list"&gt&lt/ul&gt
-&ltdiv id="demo1_page" class="demo_page"&gt&lt/div&gt
-
-//css
-    .demo_list{
-        list-style: none;
-        margin-top: 30px;
-    }
-    .demo_list li{
-        height: 30px;
-    }
-    .demo_page span{
-        display: inline-block;
-        margin:0 10px;
-    }
-    .demo_page a{
-        display: inline-block;
-        margin: 0 5px;
-    }
-    .demo_page a.ChPaging_choose{
-        color: #f00;
-    }
-    .demo_page input{
-        width: 30px;
-    }
-    .demo_page button{
-        width: 40px;
-        height: 21px;
-        line-height: 20px;
-    }
-
+&ltdiv id="demo1_page" class="Ch"&gt&lt/div&gt
 //js
     var demoYP1 = new ChPaging("#demo1_page",{
             limit : 5
-            ,viewNumber : false
             ,xhr : {
                 url : "./test.json"
                 ,data : {
@@ -117,68 +69,106 @@
                 $("#demo1_list").html("");
                 for(var i = 0; i < data.length; i++){
                     var index = (demoYP1.get("start") + i);
-                    $("#demo1_list").append("< li>第"+ index + "条。模拟数据.手动变化"+ index + index + index + index  + data[i]+"< /li>")
+                    $("#demo1_list").append("<li>第"+ index + "条。模拟数据.手动变化"+ index + index + index + index  + data[i]+"</li>")
                 }
             }
         });
 </pre>
+
     <h2>静态DEMO</h2>
     <ul id="demo2_list" class="demo_list">
-
     </ul>
-    <div id="demo2_page" class="demo_page"></div>
+    <div id="demo2_page" class="Ch"></div>
     <p>代码:</p>
     <pre>
 //html
 &ltul id="demo2_list" class="demo_list"&gt&lt/ul&gt
-&ltdiv id="demo2_page" class="demo_page"&gt&lt/div&gt
-//css
-    .demo_list{
-        list-style: none;
-        margin-top: 30px;
-    }
-    .demo_list li{
-        height: 30px;
-    }
-    .demo_page span{
-        display: inline-block;
-        margin:0 10px;
-    }
-    .demo_page a{
-        display: inline-block;
-        margin: 0 5px;
-    }
-    .demo_page a.ChPaging_choose{
-        color: #f00;
-    }
-    .demo_page input{
-        width: 30px;
-    }
-    .demo_page button{
-        width: 40px;
-        height: 21px;
-        line-height: 20px;
-    }
+&ltdiv id="demo2_page" class="Ch"&gt&lt/div&gt
 //javascript
         var data = ['测试ChPaging0','测试ChPaging1','测试ChPaging2','测试ChPaging3','测试ChPaging4','测试ChPaging5','测试ChPaging6','测试ChPaging7','测试ChPaging8','测试ChPaging9','测试ChPaging10','测试ChPaging11','测试ChPaging12','测试ChPaging13','测试ChPaging14','测试ChPaging15','测试ChPaging16','测试ChPaging17','测试ChPaging18','测试ChPaging19','测试ChPaging20','测试ChPaging21','测试ChPaging22','测试ChPaging23','测试ChPaging24','测试ChPaging25','测试ChPaging26','测试ChPaging27','测试ChPaging28','测试ChPaging29','测试ChPaging30','测试ChPaging31','测试ChPaging32','测试ChPaging33','测试ChPaging34','测试ChPaging35','测试ChPaging36','测试ChPaging37','测试ChPaging38','测试ChPaging39','测试ChPaging40','测试ChPaging41','测试ChPaging42','测试ChPaging43','测试ChPaging44','测试ChPaging45','测试ChPaging46','测试ChPaging47','测试ChPaging48','测试ChPaging49','测试ChPaging50','测试ChPaging51'];
         var demoYP2 = new ChPaging("#demo2_page",{
-            last : false
-            ,first: false
-            ,jump : false
-            ,data : data
+            data : data
             ,limit : 5
             ,viewOpt : [5,10,30]
             ,operationCallback : function(msg,data){
                 $("#demo2_list").html("");
                 for(var i = 0; i < data.length; i++){
-                    $("#demo2_list").append("< li>"+data[i]+"< /li>")
+                    $("#demo2_list").append("<li>"+data[i]+"</li>")
                 }
             }
         });</pre>
+
+
+    <h2>外部条件操作分页</h2>
+    <button id="myGo" style="margin-top: 20px">去第10页吧</button>
+    <ul id="demo3_list" class="demo_list"></ul>
+    <div id="demo3_page" class="Ch"></div>
+    <p>代码:</p>
+    <pre>
+
+        &lt;button id="myGo" style="margin-top: 20px">去第10页吧&gt;&lt;/button&gt;
+        &lt;ul id="demo3_list" class="demo_list"&gt;&lt;/ul&gt;
+        &lt;div id="demo3_page" class="Ch"&gt;&lt;/div&gt;
+
+        //js
+        var demoYP3 = new ChPaging("#demo3_page",{
+            data : data,
+            last : false,
+            first : false,
+            jump : false,
+            viewCountPage : false,
+            viewCountNumber : false,
+            viewNumber : false,
+            limit : 5,
+            viewOpt : [5,10,30],
+            xhr : {
+                url : "./test.json"
+                ,data : {
+                    limit : 5,
+                    current : 1,
+                    myPar : 1
+                }
+            },
+            xhrSuccess : function(data){
+                return  {
+                    data : data.data
+                    ,count : data.count
+                };
+            },
+            operationReady(msg){//操作翻页执行前准备钩子
+                demoYP3.set({//设置请求参数
+                    xhr : {
+                        data : {
+                            current : msg.current
+                        }
+                    }
+                });
+            },
+            operationCallback : function(msg,data){
+                $("#demo3_list").html("");
+                for(var i = 0; i < data.length; i++){
+                    var index = (demoYP3.get("start") + i);
+                    $("#demo3_list").append("<li>第"+ index + "条。模拟数据.手动变化"+ index + index + index + index  + data[i]+",观察network的请求变化</li>")
+                }
+            }
+        });
+
+        $("#myGo").click(function () {
+            demoYP3.set({
+                current : 10,//设置当前分页的参数
+                xhr : {//重新设置向后天请求的参数
+                    data : {
+                        current : 10,
+                        myPar : "parparpar"
+                    }
+                }
+            },true)
+        })
+    </pre>
+
     <script>
         var demoYP1 = new ChPaging("#demo1_page",{
             limit : 5
-//            ,viewNumber : false
             ,xhr : {
                 url : "./test.json"
                 ,data : {
@@ -213,10 +203,7 @@
 
         var data = ['测试ChPaging0','测试ChPaging1','测试ChPaging2','测试ChPaging3','测试ChPaging4','测试ChPaging5','测试ChPaging6','测试ChPaging7','测试ChPaging8','测试ChPaging9','测试ChPaging10','测试ChPaging11','测试ChPaging12','测试ChPaging13','测试ChPaging14','测试ChPaging15','测试ChPaging16','测试ChPaging17','测试ChPaging18','测试ChPaging19','测试ChPaging20','测试ChPaging21','测试ChPaging22','测试ChPaging23','测试ChPaging24','测试ChPaging25','测试ChPaging26','测试ChPaging27','测试ChPaging28','测试ChPaging29','测试ChPaging30','测试ChPaging31','测试ChPaging32','测试ChPaging33','测试ChPaging34','测试ChPaging35','测试ChPaging36','测试ChPaging37','测试ChPaging38','测试ChPaging39','测试ChPaging40','测试ChPaging41','测试ChPaging42','测试ChPaging43','测试ChPaging44','测试ChPaging45','测试ChPaging46','测试ChPaging47','测试ChPaging48','测试ChPaging49','测试ChPaging50','测试ChPaging51'];
         var demoYP2 = new ChPaging("#demo2_page",{
-            last : false
-            ,first: false
-            ,jump : false
-            ,data : data
+            data : data
             ,limit : 5
             ,viewOpt : [5,10,30]
             ,operationCallback : function(msg,data){
@@ -226,6 +213,62 @@
                 }
             }
         });
+
+
+
+        var demoYP3 = new ChPaging("#demo3_page",{
+            data : data,
+            last : false,
+            first : false,
+            jump : false,
+            viewCountPage : false,
+            viewCountNumber : false,
+            viewNumber : false,
+            limit : 5,
+            viewOpt : [5,10,30],
+            xhr : {
+                url : "./test.json"
+                ,data : {
+                    limit : 5,
+                    current : 1,
+                    myPar : 1
+                }
+            },
+            xhrSuccess : function(data){
+                return  {
+                    data : data.data
+                    ,count : data.count
+                };
+            },
+            operationReady(msg){//操作翻页执行前准备钩子
+                demoYP3.set({//设置请求参数
+                    xhr : {
+                        data : {
+                            current : msg.current
+                        }
+                    }
+                });
+            },
+            operationCallback : function(msg,data){
+                $("#demo3_list").html("");
+                for(var i = 0; i < data.length; i++){
+                    var index = (demoYP3.get("start") + i);
+                    $("#demo3_list").append("<li>第"+ index + "条。模拟数据.手动变化"+ index + index + index + index  + data[i]+",观察network的请求变化</li>")
+                }
+            }
+        });
+
+        $("#myGo").click(function () {
+            demoYP3.set({
+                current : 10,//设置当前分页的参数
+                xhr : {//重新设置向后天请求的参数
+                    data : {
+                        current : 10,
+                        myPar : "parparpar"
+                    }
+                }
+            },true)
+        })
     </script>
     
 </div>

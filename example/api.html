@@ -134,7 +134,7 @@
             <td>String</td>
             <td>否</td>
             <td>
-                class名前缀,默认值"Ch";自己定义Class名,样式完全由自己掌控。class名请查阅class元素表
+                class名前缀,默认值"Ch";自己定义Class名,避免重复。class名请查阅class元素表
             </td>
         </tr>
         <tr>
@@ -241,6 +241,7 @@
             <p>详细</p>
             <div class="detail">
                 实例方法,数据更新需要重新计算分页条数则掉用此方法。<br/>
+                <b class="red">这是最重要的一个方法,如果外部条件需要重新加载表格数据。则调用此方法设置第二个参数为true即可,不用重新再NEW一个实例。</b><br/>
                 第二个参数为true时,立即使用新配置更新分页。在外部条件控制分页时使用,在operationCallback内使用立即更新功能会导致死循环。
             </div>
         </li>

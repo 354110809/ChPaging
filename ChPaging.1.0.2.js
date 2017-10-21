@@ -134,7 +134,7 @@
             // this.o = $.extend(true,{},myThis.o);
             var _o = myThis.o;
 
-            myThis.static.start = 1;
+            myThis.static.start = (_o.current * _o.limit) - _o.limit + 1;
             var msg = {
                 event : "reload"
                 ,type : "reload"
@@ -230,7 +230,7 @@
             //如果走的静态数据则取出前页需要展示的数据
             if(!_o.xhr){
                 data = [];
-                for(var i = myThis.static.start; i < myThis.static.end; i++){
+                for(var i = myThis.static.start-1; i < myThis.static.end; i++){
                     data.push(_o.data[i]);
                 }
 
@@ -311,6 +311,9 @@
                     $myThis.trigger("jump",[msg]);
                 }
             }).on("click","#ChPagingFirst",function () {//首页
+                if(_o.current == 1){
+                    return false;
+                }
                 _o.current = 1;
                 msg ={
                     event : "jump"
@@ -318,6 +321,9 @@
                 };
                 $myThis.trigger("jump",[msg]);
             }).on("click","#ChPagingLast",function () {//末页
+                if(_o.current == _o.pageCount){
+                    return false;
+                }
                 _o.current = _o.pageCount;
                 msg ={
                     event : "jump"
@@ -325,10 +331,10 @@
                 };
                 $myThis.trigger("jump",[msg]);
             }).on("click","#ChPagingNext",function () {//下一页
-                _o.current++;
-                if(_o.current > _o.pageCount){
-                    _o.current = _o.pageCount
+                if(_o.current == _o.pageCount){
+                    return false;
                 }
+                _o.current++;
                 msg ={
                     event : "jump"
                     ,type : "next"
@@ -336,10 +342,10 @@
                 $myThis.trigger("jump",[msg]);
 
             }).on("click","#ChPagingPrev",function () {//上一页
-                _o.current--;
-                if(_o.current <= 0 ){
-                    _o.current = 1
+                if(_o.current == 1){
+                    return false;
                 }
+                _o.current--;
                 msg ={
                     event : "jump"
                     ,type : "prev"
